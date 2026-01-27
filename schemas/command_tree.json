@@ -1,0 +1,3443 @@
+{
+  "default_api_path": "/api/main/methods",
+  "default_base_url": "https://penpot.example.com",
+  "resources": [
+    {
+      "name": "access-token",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "expiration",
+              "format": "duration",
+              "item_type": null,
+              "list": false,
+              "name": "expiration",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-access-token",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-access-token",
+          "name": "delete"
+        }
+      ]
+    },
+    {
+      "name": "access-tokens",
+      "ops": [
+        {
+          "args": [],
+          "method": "get-access-tokens",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "all-projects",
+      "ops": [
+        {
+          "args": [],
+          "method": "get-all-projects",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "all-threads-as-read",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "threads",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "threads",
+              "required": true,
+              "schema_type": "array"
+            }
+          ],
+          "method": "mark-all-threads-as-read",
+          "name": "mark"
+        }
+      ]
+    },
+    {
+      "name": "audit-events",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "events",
+              "format": null,
+              "item_type": "object",
+              "list": true,
+              "name": "events",
+              "required": true,
+              "schema_type": "array"
+            }
+          ],
+          "method": "push-audit-events",
+          "name": "push"
+        }
+      ]
+    },
+    {
+      "name": "binfile",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "embed-assets",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "embedAssets",
+              "required": true,
+              "schema_type": "boolean"
+            },
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "include-libraries",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "includeLibraries",
+              "required": true,
+              "schema_type": "boolean"
+            }
+          ],
+          "method": "export-binfile",
+          "name": "export"
+        },
+        {
+          "args": [
+            {
+              "flag": "file",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "file",
+              "required": true,
+              "schema_type": "object"
+            },
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": true,
+              "schema_type": "json"
+            },
+            {
+              "flag": "project-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "projectId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "version",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "version",
+              "required": false,
+              "schema_type": "integer"
+            }
+          ],
+          "method": "import-binfile",
+          "name": "import"
+        }
+      ]
+    },
+    {
+      "name": "comment",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "content",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "content",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "mentions",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "mentions",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "thread-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "threadId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-comment",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-comment",
+          "name": "delete"
+        },
+        {
+          "args": [
+            {
+              "flag": "content",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "content",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "mentions",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "mentions",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-comment",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "comment-thread",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "content",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "content",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "frame-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "frameId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "mentions",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "mentions",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "page-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "pageId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "position",
+              "format": "point",
+              "item_type": null,
+              "list": false,
+              "name": "position",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-comment-thread",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-comment-thread",
+          "name": "delete"
+        },
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-comment-thread",
+          "name": "get"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "is-resolved",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "isResolved",
+              "required": true,
+              "schema_type": "boolean"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-comment-thread",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "comment-thread-frame",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "frame-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "frameId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-comment-thread-frame",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "comment-thread-position",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "frame-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "frameId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "position",
+              "format": "point",
+              "item_type": null,
+              "list": false,
+              "name": "position",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-comment-thread-position",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "comment-thread-status",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-comment-thread-status",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "comment-threads",
+      "ops": [
+        {
+          "args": [],
+          "method": "get-comment-threads",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "comments",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "thread-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "threadId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-comments",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "delete-team-files",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "ids",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "ids",
+              "required": true,
+              "schema_type": "array"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "permanently-delete-team-files",
+          "name": "permanently"
+        }
+      ]
+    },
+    {
+      "name": "deleted-team-files",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "ids",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "ids",
+              "required": true,
+              "schema_type": "array"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "restore-deleted-team-files",
+          "name": "restore"
+        }
+      ]
+    },
+    {
+      "name": "email-change",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "email",
+              "format": "email",
+              "item_type": null,
+              "list": false,
+              "name": "email",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "request-email-change",
+          "name": "request"
+        }
+      ]
+    },
+    {
+      "name": "file",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "features",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "features",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "is-shared",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "isShared",
+              "required": false,
+              "schema_type": "boolean"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "project-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "projectId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-file",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-file",
+          "name": "delete"
+        },
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "duplicate-file",
+          "name": "duplicate"
+        },
+        {
+          "args": [
+            {
+              "flag": "features",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "features",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-file",
+          "name": "get"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "rename-file",
+          "name": "rename"
+        },
+        {
+          "args": [
+            {
+              "flag": "changes",
+              "format": null,
+              "item_type": "json",
+              "list": true,
+              "name": "changes",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "changes-with-metadata",
+              "format": null,
+              "item_type": "object",
+              "list": true,
+              "name": "changesWithMetadata",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "features",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "features",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "revn",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "revn",
+              "required": true,
+              "schema_type": "integer"
+            },
+            {
+              "flag": "session-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "sessionId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "skip-validate",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "skipValidate",
+              "required": false,
+              "schema_type": "boolean"
+            },
+            {
+              "flag": "vern",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "vern",
+              "required": true,
+              "schema_type": "integer"
+            }
+          ],
+          "method": "update-file",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "file-data-for-thumbnail",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-file-data-for-thumbnail",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "file-fragment",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "fragment-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fragmentId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-file-fragment",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "file-from-library",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "library-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "libraryId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "unlink-file-from-library",
+          "name": "unlink"
+        }
+      ]
+    },
+    {
+      "name": "file-info",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "features",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "features",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-file-info",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "file-libraries",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-file-libraries",
+          "name": "get"
+        },
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "has-file-libraries",
+          "name": "has"
+        }
+      ]
+    },
+    {
+      "name": "file-library-sync-status",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "date",
+              "format": "iso",
+              "item_type": null,
+              "list": false,
+              "name": "date",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "ignore-file-library-sync-status",
+          "name": "ignore"
+        },
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "library-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "libraryId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-file-library-sync-status",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "file-media-object",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "is-local",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "isLocal",
+              "required": true,
+              "schema_type": "boolean"
+            }
+          ],
+          "method": "clone-file-media-object",
+          "name": "clone"
+        },
+        {
+          "args": [
+            {
+              "flag": "content",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "content",
+              "required": true,
+              "schema_type": "object"
+            },
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "is-local",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "isLocal",
+              "required": true,
+              "schema_type": "boolean"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "upload-file-media-object",
+          "name": "upload"
+        }
+      ]
+    },
+    {
+      "name": "file-media-object-from-url",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "is-local",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "isLocal",
+              "required": true,
+              "schema_type": "boolean"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "url",
+              "format": "uri",
+              "item_type": null,
+              "list": false,
+              "name": "url",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-file-media-object-from-url",
+          "name": "create"
+        }
+      ]
+    },
+    {
+      "name": "file-object-thumbnail",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "media",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "media",
+              "required": true,
+              "schema_type": "object"
+            },
+            {
+              "flag": "object-id",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "objectId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "tag",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "tag",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-file-object-thumbnail",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "object-id",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "objectId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-file-object-thumbnail",
+          "name": "delete"
+        }
+      ]
+    },
+    {
+      "name": "file-object-thumbnails",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "tag",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "tag",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-file-object-thumbnails",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "file-shared",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "is-shared",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "isShared",
+              "required": true,
+              "schema_type": "boolean"
+            }
+          ],
+          "method": "set-file-shared",
+          "name": "set"
+        }
+      ]
+    },
+    {
+      "name": "file-snapshot",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "label",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "label",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-file-snapshot",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-file-snapshot",
+          "name": "delete"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "lock-file-snapshot",
+          "name": "lock"
+        },
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "restore-file-snapshot",
+          "name": "restore"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "unlock-file-snapshot",
+          "name": "unlock"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "label",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "label",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-file-snapshot",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "file-snapshots",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-file-snapshots",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "file-summary",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-file-summary",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "file-thumbnail",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "media",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "media",
+              "required": true,
+              "schema_type": "object"
+            },
+            {
+              "flag": "revn",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "revn",
+              "required": true,
+              "schema_type": "integer"
+            }
+          ],
+          "method": "create-file-thumbnail",
+          "name": "create"
+        }
+      ]
+    },
+    {
+      "name": "file-to-library",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "library-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "libraryId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "link-file-to-library",
+          "name": "link"
+        }
+      ]
+    },
+    {
+      "name": "files",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "ids",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "ids",
+              "required": true,
+              "schema_type": "array"
+            },
+            {
+              "flag": "project-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "projectId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "move-files",
+          "name": "move"
+        },
+        {
+          "args": [
+            {
+              "flag": "search-term",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "searchTerm",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "search-files",
+          "name": "search"
+        }
+      ]
+    },
+    {
+      "name": "font",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-font",
+          "name": "delete"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-font",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "font-variant",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "data",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "data",
+              "required": true,
+              "schema_type": "object"
+            },
+            {
+              "flag": "font-family",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "fontFamily",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "font-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fontId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "font-style",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "fontStyle",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "font-weight",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "fontWeight",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-font-variant",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-font-variant",
+          "name": "delete"
+        }
+      ]
+    },
+    {
+      "name": "font-variants",
+      "ops": [
+        {
+          "args": [],
+          "method": "get-font-variants",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "library-file-references",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-library-file-references",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "library-usage",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-library-usage",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "misc",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "profile-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "profileId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "logout",
+          "name": "logout"
+        }
+      ]
+    },
+    {
+      "name": "owned-teams",
+      "ops": [
+        {
+          "args": [],
+          "method": "get-owned-teams",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "page",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "features",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "features",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "object-id",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "objectId",
+              "required": false,
+              "schema_type": "json"
+            },
+            {
+              "flag": "page-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "pageId",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-page",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "profile",
+      "ops": [
+        {
+          "args": [],
+          "method": "get-profile",
+          "name": "get"
+        },
+        {
+          "args": [
+            {
+              "flag": "password",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "password",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "token",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "token",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "recover-profile",
+          "name": "recover"
+        },
+        {
+          "args": [
+            {
+              "flag": "token",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "token",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "register-profile",
+          "name": "register"
+        },
+        {
+          "args": [
+            {
+              "flag": "fullname",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "fullname",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "lang",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "lang",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "theme",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "theme",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-profile",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "profile-notifications",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "dashboard-comments",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "dashboardComments",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "email-comments",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "emailComments",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "email-invites",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "emailInvites",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-profile-notifications",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "profile-password",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "old-password",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "oldPassword",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "password",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "password",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-profile-password",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "profile-photo",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "file",
+              "required": true,
+              "schema_type": "object"
+            }
+          ],
+          "method": "update-profile-photo",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "profile-props",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "props",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "props",
+              "required": true,
+              "schema_type": "object"
+            }
+          ],
+          "method": "update-profile-props",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "profile-recovery",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "email",
+              "format": "email",
+              "item_type": null,
+              "list": false,
+              "name": "email",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "request-profile-recovery",
+          "name": "request"
+        }
+      ]
+    },
+    {
+      "name": "profiles-for-file-comments",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-profiles-for-file-comments",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "project",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-project",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-project",
+          "name": "delete"
+        },
+        {
+          "args": [
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "project-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "projectId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "duplicate-project",
+          "name": "duplicate"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-project",
+          "name": "get"
+        },
+        {
+          "args": [
+            {
+              "flag": "project-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "projectId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "move-project",
+          "name": "move"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "rename-project",
+          "name": "rename"
+        }
+      ]
+    },
+    {
+      "name": "project-files",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "project-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "projectId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-project-files",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "project-pin",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "is-pinned",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "isPinned",
+              "required": true,
+              "schema_type": "boolean"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-project-pin",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "projects",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-projects",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "register-profile",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "create-welcome-file",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "createWelcomeFile",
+              "required": false,
+              "schema_type": "boolean"
+            },
+            {
+              "flag": "email",
+              "format": "email",
+              "item_type": null,
+              "list": false,
+              "name": "email",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "fullname",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "fullname",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "invitation-token",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "invitationToken",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "password",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "password",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "prepare-register-profile",
+          "name": "prepare"
+        }
+      ]
+    },
+    {
+      "name": "share-link",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "pages",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "pages",
+              "required": true,
+              "schema_type": "array"
+            },
+            {
+              "flag": "who-comment",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "whoComment",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "who-inspect",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "whoInspect",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-share-link",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-share-link",
+          "name": "delete"
+        }
+      ]
+    },
+    {
+      "name": "sso-provider",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "email",
+              "format": "email",
+              "item_type": null,
+              "list": false,
+              "name": "email",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-sso-provider",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "team",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "features",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "features",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-team",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-team",
+          "name": "delete"
+        },
+        {
+          "args": [],
+          "method": "get-team",
+          "name": "get"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "reassign-to",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "reassignTo",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "leave-team",
+          "name": "leave"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-team",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "team-access-request",
+      "ops": [
+        {
+          "args": [],
+          "method": "create-team-access-request",
+          "name": "create"
+        }
+      ]
+    },
+    {
+      "name": "team-deleted-files",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-team-deleted-files",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "team-info",
+      "ops": [
+        {
+          "args": [],
+          "method": "get-team-info",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "team-invitation",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "email",
+              "format": "email",
+              "item_type": null,
+              "list": false,
+              "name": "email",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-team-invitation",
+          "name": "delete"
+        }
+      ]
+    },
+    {
+      "name": "team-invitation-role",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "email",
+              "format": "email",
+              "item_type": null,
+              "list": false,
+              "name": "email",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "role",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "role",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-team-invitation-role",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "team-invitation-token",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "email",
+              "format": "email",
+              "item_type": null,
+              "list": false,
+              "name": "email",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-team-invitation-token",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "team-invitations",
+      "ops": [
+        {
+          "args": [],
+          "method": "create-team-invitations",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-team-invitations",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "team-member",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "member-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "memberId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-team-member",
+          "name": "delete"
+        }
+      ]
+    },
+    {
+      "name": "team-member-role",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "member-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "memberId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "role",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "role",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-team-member-role",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "team-members",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-team-members",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "team-photo",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "file",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "file",
+              "required": true,
+              "schema_type": "object"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-team-photo",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "team-recent-files",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-team-recent-files",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "team-shared-files",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-team-shared-files",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "team-stats",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-team-stats",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "team-users",
+      "ops": [
+        {
+          "args": [],
+          "method": "get-team-users",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "team-with-invitations",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "emails",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "emails",
+              "required": true,
+              "schema_type": "array"
+            },
+            {
+              "flag": "features",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "features",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "name",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "name",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "role",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "role",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-team-with-invitations",
+          "name": "create"
+        }
+      ]
+    },
+    {
+      "name": "teams",
+      "ops": [
+        {
+          "args": [],
+          "method": "get-teams",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "template",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "project-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "projectId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "template-id",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "templateId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "clone-template",
+          "name": "clone"
+        }
+      ]
+    },
+    {
+      "name": "token",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "token",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "token",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "verify-token",
+          "name": "verify"
+        }
+      ]
+    },
+    {
+      "name": "unread-comment-threads",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-unread-comment-threads",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "user-feedback",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "content",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "content",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "error-href",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "errorHref",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "error-report",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "errorReport",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "subject",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "subject",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "type",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "type",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "send-user-feedback",
+          "name": "send"
+        }
+      ]
+    },
+    {
+      "name": "view-only-bundle",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "features",
+              "format": null,
+              "item_type": "string",
+              "list": true,
+              "name": "features",
+              "required": false,
+              "schema_type": "array"
+            },
+            {
+              "flag": "file-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "fileId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "share-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "shareId",
+              "required": false,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-view-only-bundle",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "webhook",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "mtype",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "mtype",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "uri",
+              "format": "uri",
+              "item_type": null,
+              "list": false,
+              "name": "uri",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "create-webhook",
+          "name": "create"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "delete-webhook",
+          "name": "delete"
+        },
+        {
+          "args": [
+            {
+              "flag": "id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "id",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "is-active",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "isActive",
+              "required": true,
+              "schema_type": "boolean"
+            },
+            {
+              "flag": "mtype",
+              "format": null,
+              "item_type": null,
+              "list": false,
+              "name": "mtype",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "uri",
+              "format": "uri",
+              "item_type": null,
+              "list": false,
+              "name": "uri",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "update-webhook",
+          "name": "update"
+        }
+      ]
+    },
+    {
+      "name": "webhooks",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "team-id",
+              "format": "uuid",
+              "item_type": null,
+              "list": false,
+              "name": "teamId",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "get-webhooks",
+          "name": "get"
+        }
+      ]
+    },
+    {
+      "name": "with-ldap",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "email",
+              "format": "email",
+              "item_type": null,
+              "list": false,
+              "name": "email",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "invitation-token",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "invitationToken",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "password",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "password",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "login-with-ldap",
+          "name": "login"
+        }
+      ]
+    },
+    {
+      "name": "with-password",
+      "ops": [
+        {
+          "args": [
+            {
+              "flag": "email",
+              "format": "email",
+              "item_type": null,
+              "list": false,
+              "name": "email",
+              "required": true,
+              "schema_type": "string"
+            },
+            {
+              "flag": "invitation-token",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "invitationToken",
+              "required": false,
+              "schema_type": "string"
+            },
+            {
+              "flag": "password",
+              "format": "string",
+              "item_type": null,
+              "list": false,
+              "name": "password",
+              "required": true,
+              "schema_type": "string"
+            }
+          ],
+          "method": "login-with-password",
+          "name": "login"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}
