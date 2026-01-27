@@ -2,20 +2,23 @@
 set -euo pipefail
 
 REPO="radjathaher/penpot-cli"
+BIN="penpot"
+VERSION="${PENPOT_CLI_VERSION:-latest}"
+
 OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
 ARCH="$(uname -m)"
 
 case "$OS" in
   darwin) OS="darwin" ;;
-  *) echo "unsupported OS: $OS (only macOS arm64 supported)"; exit 1 ;;
+  linux) OS="linux" ;;
+  *) echo "unsupported OS: $OS (supported: macOS, Linux)" >&2; exit 1 ;;
 esac
 
 case "$ARCH" in
   arm64|aarch64) ARCH="aarch64" ;;
-  *) echo "unsupported arch: $ARCH (only arm64 supported)"; exit 1 ;;
+  x86_64|amd64) ARCH="x86_64" ;;
+  *) echo "unsupported arch: $ARCH (supported: arm64, x86_64)" >&2; exit 1 ;;
 esac
-
-VERSION="${PENPOT_CLI_VERSION:-latest}"
 
 if [[ "$VERSION" == "latest" ]]; then
   api_url="https://api.github.com/repos/${REPO}/releases/latest"
@@ -23,7 +26,19 @@ else
   api_url="https://api.github.com/repos/${REPO}/releases/tags/${VERSION}"
 fi
 
-API_URL="$api_url" OS_NAME="$OS" ARCH_NAME="$ARCH" asset_url=$(python - <<'PY'
+PYTHON_BIN="${PYTHON_BIN:-}"
+if [[ -z "$PYTHON_BIN" ]]; then
+  if command -v python3 >/dev/null 2>&1; then
+    PYTHON_BIN="python3"
+  elif command -v python >/dev/null 2>&1; then
+    PYTHON_BIN="python"
+  else
+    echo "python3 is required to install ${BIN}" >&2
+    exit 1
+  fi
+fi
+
+asset_url=$(API_URL="$api_url" OS_NAME="$OS" ARCH_NAME="$ARCH" "$PYTHON_BIN" - <<'PY'
 import json
 import os
 import sys
@@ -53,14 +68,22 @@ if [[ -z "$asset_url" ]]; then
   exit 1
 fi
 
-TMP_DIR=$(mktemp -d)
-trap 'rm -rf "$TMP_DIR"' EXIT
+tmp_dir="$(mktemp -d)"
+trap 'rm -rf "$tmp_dir"' EXIT
 
-curl -fsSL "$asset_url" -o "$TMP_DIR/penpot-cli.tar.gz"
-tar -xzf "$TMP_DIR/penpot-cli.tar.gz" -C "$TMP_DIR"
+curl -fsSL "$asset_url" -o "$tmp_dir/${BIN}.tar.gz"
+tar -xzf "$tmp_dir/${BIN}.tar.gz" -C "$tmp_dir"
 
-BIN_DIR="${BIN_DIR:-$HOME/.local/bin}"
-mkdir -p "$BIN_DIR"
-install -m 755 "$TMP_DIR/penpot" "$BIN_DIR/penpot"
+install_dir="${BIN_DIR:-}"
+if [[ -z "$install_dir" ]]; then
+  if [[ -w "/usr/local/bin" ]]; then
+    install_dir="/usr/local/bin"
+  else
+    install_dir="$HOME/.local/bin"
+  fi
+fi
 
-echo "installed: $BIN_DIR/penpot"
+mkdir -p "$install_dir"
+install -m 755 "$tmp_dir/${BIN}" "$install_dir/${BIN}"
+
+echo "installed: $install_dir/${BIN}"

@@ -4,7 +4,7 @@ Auto-generated Penpot CLI from the backend OpenAPI (RPC) schema. Designed for LL
 
 ## Install
 
-### Install script (macOS arm64 only)
+### Install script (macOS arm64 + Linux x86_64)
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/radjathaher/penpot-cli/main/scripts/install.sh | bash
