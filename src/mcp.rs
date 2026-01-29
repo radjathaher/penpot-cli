@@ -43,7 +43,7 @@ impl McpClient {
             .client
             .post(&self.base_url)
             .header("content-type", "application/json")
-            .header("accept", "application/json")
+            .header("accept", "application/json, text/event-stream")
             .json(&body);
 
         if let Some(key) = &self.api_key {
