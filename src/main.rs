@@ -1,11 +1,14 @@
 mod command_tree;
 mod http;
+mod mcp;
 
 use anyhow::{Context, Result, anyhow};
+use base64::Engine as _;
 use clap::{Arg, ArgAction, Command};
 use command_tree::{ArgDef, CommandTree, Operation};
+use mcp::{McpClient, base64_encode, infer_mime};
 use serde_json::{Map, Value, json};
-use std::{env, io::Write};
+use std::{env, fs, io::Write, path::Path};
 
 fn main() {
     if let Err(err) = run() {
@@ -27,6 +30,9 @@ fn run() -> Result<()> {
     }
     if let Some(matches) = matches.subcommand_matches("tree") {
         return handle_tree(&tree, matches);
+    }
+    if let Some(matches) = matches.subcommand_matches("mcp") {
+        return handle_mcp(matches);
     }
 
     let token = env::var("PENPOT_ACCESS_TOKEN").context("PENPOT_ACCESS_TOKEN missing")?;
@@ -134,6 +140,8 @@ fn build_cli(tree: &CommandTree) -> Command {
         ),
     );
 
+    cmd = cmd.subcommand(build_mcp_cli());
+
     for resource in &tree.resources {
         let mut res_cmd = Command::new(resource.name.clone())
             .about(resource.name.clone())
@@ -215,6 +223,223 @@ fn handle_tree(tree: &CommandTree, matches: &clap::ArgMatches) -> Result<()> {
     Ok(())
 }
 
+fn build_mcp_cli() -> Command {
+    let mut cmd = Command::new("mcp")
+        .about("Penpot MCP tools (plugin-based)")
+        .arg(
+            Arg::new("mcp_url")
+                .long("mcp-url")
+                .value_name("URL")
+                .help("MCP HTTP endpoint URL (default: PENPOT_MCP_URL)"),
+        )
+        .arg(
+            Arg::new("mcp_api_key")
+                .long("mcp-api-key")
+                .value_name("KEY")
+                .help("MCP API key (default: PENPOT_MCP_API_KEY)"),
+        )
+        .subcommand_required(true)
+        .arg_required_else_help(true);
+
+    cmd = cmd.subcommand(Command::new("overview").about("Show MCP high-level overview"));
+    cmd = cmd.subcommand(
+        Command::new("api-info")
+            .about("Get Penpot Plugin API info")
+            .arg(Arg::new("type").long("type").required(true))
+            .arg(Arg::new("member").long("member")),
+    );
+    cmd = cmd.subcommand(
+        Command::new("exec")
+            .about("Execute JS in plugin context")
+            .arg(Arg::new("code").long("code").value_name("JS"))
+            .arg(
+                Arg::new("file")
+                    .long("file")
+                    .value_name("PATH")
+                    .help("Read JS code from file"),
+            ),
+    );
+    cmd = cmd.subcommand(
+        Command::new("export-shape")
+            .about("Export shape to PNG or SVG")
+            .arg(Arg::new("shape_id").long("shape-id").required(true))
+            .arg(
+                Arg::new("format")
+                    .long("format")
+                    .value_name("png|svg")
+                    .default_value("png"),
+            )
+            .arg(
+                Arg::new("mode")
+                    .long("mode")
+                    .value_name("shape|fill")
+                    .default_value("shape"),
+            )
+            .arg(
+                Arg::new("out")
+                    .long("out")
+                    .value_name("PATH")
+                    .help("Write output to local file"),
+            ),
+    );
+    cmd = cmd.subcommand(
+        Command::new("import-image")
+            .about("Import local image via plugin")
+            .arg(Arg::new("file").long("file").required(true))
+            .arg(Arg::new("x").long("x"))
+            .arg(Arg::new("y").long("y"))
+            .arg(Arg::new("width").long("width"))
+            .arg(Arg::new("height").long("height")),
+    );
+
+    cmd
+}
+
+fn handle_mcp(matches: &clap::ArgMatches) -> Result<()> {
+    let mcp_url = matches
+        .get_one::<String>("mcp_url")
+        .cloned()
+        .or_else(|| env::var("PENPOT_MCP_URL").ok())
+        .ok_or_else(|| anyhow!("PENPOT_MCP_URL missing"))?;
+    let api_key = matches
+        .get_one::<String>("mcp_api_key")
+        .cloned()
+        .or_else(|| env::var("PENPOT_MCP_API_KEY").ok());
+    let pretty = matches.get_flag("pretty");
+    let client = McpClient::new(mcp_url, api_key)?;
+
+    let (cmd, cmd_matches) = matches
+        .subcommand()
+        .ok_or_else(|| anyhow!("mcp subcommand required"))?;
+
+    let result = match cmd {
+        "overview" => client.call_tool("high_level_overview", json!({}))?,
+        "api-info" => {
+            let ty = cmd_matches
+                .get_one::<String>("type")
+                .ok_or_else(|| anyhow!("--type required"))?;
+            let member = cmd_matches.get_one::<String>("member");
+            let mut args = Map::new();
+            args.insert("type".to_string(), json!(ty));
+            if let Some(member) = member {
+                args.insert("member".to_string(), json!(member));
+            }
+            client.call_tool("penpot_api_info", Value::Object(args))?
+        }
+        "exec" => {
+            let code = if let Some(path) = cmd_matches.get_one::<String>("file") {
+                fs::read_to_string(path).context("read code file")?
+            } else {
+                cmd_matches
+                    .get_one::<String>("code")
+                    .cloned()
+                    .ok_or_else(|| anyhow!("--code or --file required"))?
+            };
+            client.call_tool("execute_code", json!({ "code": code }))?
+        }
+        "export-shape" => {
+            let shape_id = cmd_matches
+                .get_one::<String>("shape_id")
+                .ok_or_else(|| anyhow!("--shape-id required"))?;
+            let format = cmd_matches
+                .get_one::<String>("format")
+                .map(String::as_str)
+                .unwrap_or("png");
+            let mode = cmd_matches
+                .get_one::<String>("mode")
+                .map(String::as_str)
+                .unwrap_or("shape");
+            let out_path = cmd_matches.get_one::<String>("out");
+
+            let result = client.call_tool(
+                "export_shape",
+                json!({
+                    "shapeId": shape_id,
+                    "format": format,
+                    "mode": mode
+                }),
+            )?;
+
+            if let Some(out_path) = out_path {
+                write_mcp_output_file(out_path, &result)?;
+                json!({ "saved": out_path })
+            } else {
+                result
+            }
+        }
+        "import-image" => {
+            let path = cmd_matches
+                .get_one::<String>("file")
+                .ok_or_else(|| anyhow!("--file required"))?;
+            let file_path = Path::new(path);
+            let bytes = fs::read(file_path).context("read image file")?;
+            let mime = infer_mime(file_path)?;
+            let name = file_path
+                .file_name()
+                .and_then(|v| v.to_str())
+                .unwrap_or("image");
+            let base64 = base64_encode(&bytes);
+            let x = cmd_matches.get_one::<String>("x").map(String::as_str);
+            let y = cmd_matches.get_one::<String>("y").map(String::as_str);
+            let width = cmd_matches.get_one::<String>("width").map(String::as_str);
+            let height = cmd_matches.get_one::<String>("height").map(String::as_str);
+
+            let code = format!(
+                "const rect = await penpotUtils.importImage({base64}, {mime}, {name}, {x}, {y}, {width}, {height}); return {{ shapeId: rect.id }};",
+                base64 = serde_json::to_string(&base64)?,
+                mime = serde_json::to_string(mime)?,
+                name = serde_json::to_string(name)?,
+                x = x.unwrap_or("undefined"),
+                y = y.unwrap_or("undefined"),
+                width = width.unwrap_or("undefined"),
+                height = height.unwrap_or("undefined"),
+            );
+
+            client.call_tool("execute_code", json!({ "code": code }))?
+        }
+        _ => return Err(anyhow!("unknown mcp subcommand: {cmd}")),
+    };
+
+    if pretty {
+        write_stdout_line(&serde_json::to_string_pretty(&result)?)?;
+    } else {
+        write_stdout_line(&serde_json::to_string(&result)?)?;
+    }
+    Ok(())
+}
+
+fn write_mcp_output_file(path: &str, result: &Value) -> Result<()> {
+    let content = result
+        .get("content")
+        .and_then(|v| v.as_array())
+        .ok_or_else(|| anyhow!("mcp result missing content"))?;
+    let first = content
+        .first()
+        .ok_or_else(|| anyhow!("mcp content empty"))?;
+    let ty = first.get("type").and_then(|v| v.as_str()).unwrap_or("");
+    match ty {
+        "image" => {
+            let data = first
+                .get("data")
+                .and_then(|v| v.as_str())
+                .ok_or_else(|| anyhow!("mcp image data missing"))?;
+            let bytes = base64::engine::general_purpose::STANDARD
+                .decode(data)
+                .context("decode base64 image")?;
+            fs::write(path, bytes).context("write image file")?;
+        }
+        "text" => {
+            let text = first
+                .get("text")
+                .and_then(|v| v.as_str())
+                .ok_or_else(|| anyhow!("mcp text missing"))?;
+            fs::write(path, text).context("write text file")?;
+        }
+        _ => return Err(anyhow!("unsupported mcp content type: {ty}")),
+    }
+    Ok(())
+}
+
 fn write_stdout_line(value: &str) -> Result<()> {
     let mut out = std::io::stdout().lock();
     if let Err(err) = out.write_all(value.as_bytes()) {
@@ -251,7 +476,9 @@ fn arg_value_name(arg: &ArgDef) -> String {
             .or_else(|| arg.schema_type.clone())
             .unwrap_or_else(|| "json".to_string())
     } else {
-        arg.schema_type.clone().unwrap_or_else(|| "json".to_string())
+        arg.schema_type
+            .clone()
+            .unwrap_or_else(|| "json".to_string())
     };
     if arg.list {
         format!("list<{base}>")
@@ -330,7 +557,11 @@ fn parse_scalar_arg(arg: &ArgDef, value: &str) -> Result<Value> {
     parse_scalar_value(arg.schema_type.as_deref(), arg.format.as_deref(), value)
 }
 
-fn parse_scalar_value(schema_type: Option<&str>, _format: Option<&str>, value: &str) -> Result<Value> {
+fn parse_scalar_value(
+    schema_type: Option<&str>,
+    _format: Option<&str>,
+    value: &str,
+) -> Result<Value> {
     match schema_type.unwrap_or("") {
         "integer" => Ok(Value::Number(value.parse::<i64>()?.into())),
         "number" => Ok(json!(value.parse::<f64>()?)),
@@ -340,7 +571,10 @@ fn parse_scalar_value(schema_type: Option<&str>, _format: Option<&str>, value: &
             Ok(parsed)
         }
         "json" => {
-            if value.trim_start().starts_with('{') || value.trim_start().starts_with('[') || value.trim() == "null" {
+            if value.trim_start().starts_with('{')
+                || value.trim_start().starts_with('[')
+                || value.trim() == "null"
+            {
                 let parsed: Value = serde_json::from_str(value).context("invalid JSON value")?;
                 Ok(parsed)
             } else {

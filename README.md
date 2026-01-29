@@ -39,6 +39,27 @@ Optional override:
 export PENPOT_API_URL="https://penpot.example.com/api/main/methods"
 ```
 
+## MCP (Plugin) mode
+
+Use the Penpot MCP server (plugin-based design edits). Requires:
+- MCP endpoint URL
+- MCP API key (if enabled)
+
+```bash
+export PENPOT_MCP_URL="https://mcp.penpot.example.com/mcp"
+export PENPOT_MCP_API_KEY="..."
+```
+
+Examples:
+
+```bash
+penpot mcp overview
+penpot mcp api-info --type Penpot
+penpot mcp exec --code "return penpot.currentFile?.name"
+penpot mcp export-shape --shape-id selection --format png --out ./shape.png
+penpot mcp import-image --file ./logo.png --x 100 --y 200 --width 256
+```
+
 ## Discovery (LLM-friendly)
 
 ```bash
