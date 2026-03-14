@@ -306,7 +306,7 @@ fn handle_mcp(matches: &clap::ArgMatches) -> Result<()> {
         .cloned()
         .or_else(|| env::var("PENPOT_MCP_API_KEY").ok());
     let pretty = matches.get_flag("pretty");
-    let client = McpClient::new(mcp_url, api_key)?;
+    let mut client = McpClient::new(mcp_url, api_key)?;
 
     let (cmd, cmd_matches) = matches
         .subcommand()
